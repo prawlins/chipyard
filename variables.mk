@@ -282,9 +282,9 @@ endef
 # (1) - sbt project to assemble
 # (2) - classpath file(s) to create
 define run_sbt_assembly
+	#cd $(base_dir) && $(SBT) -J-Xmx8G -J-Xss8M ";project $(1); set assembly / assemblyOutputPath := file(\"$(2)\"); assembly" && touch $(2)
 	cd $(base_dir) && $(SBT) ";project $(1); set assembly / assemblyOutputPath := file(\"$(2)\"); assembly" && touch $(2)
 endef
-
 #########################################################################################
 # output directory for tests
 #########################################################################################

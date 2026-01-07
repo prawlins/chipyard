@@ -25,7 +25,7 @@ import sifive.blocks.devices.gpio._
 import sifive.blocks.devices.uart._
 import sifive.blocks.devices.spi._
 import sifive.blocks.devices.i2c._
-import tracegen.{TraceGenSystemModuleImp}
+//import tracegen.{TraceGenSystemModuleImp}
 
 import chipyard.iocell._
 
@@ -471,19 +471,20 @@ class WithNICIOPunchthrough extends OverrideIOBinder({
   }
 })
 
-class WithTraceGenSuccessPunchthrough extends OverrideIOBinder({
-  (system: TraceGenSystemModuleImp) => {
-    val success: Bool = IO(Output(Bool())).suggestName("success")
-    success := system.success
-    (Seq(SuccessPort(() => success)), Nil)
-  }
-})
+// class WithTraceGenSuccessPunchthrough extends OverrideIOBinder({
+//  (system: TraceGenSystemModuleImp) => {
+//    val success: Bool = IO(Output(Bool())).suggestName("success")
+//    success := system.success
+//    (Seq(SuccessPort(() => success)), Nil)
+//  }
+// })
 
 class WithTraceIOPunchthrough extends OverrideLazyIOBinder({
   (system: CanHaveTraceIO) => InModuleBody {
-    val ports: Option[TracePort] = system.traceIO.map { t =>
-      val trace = IO(DataMirror.internal.chiselTypeClone[TraceOutputTop](t)).suggestName("trace")
-      trace <> t
+    val ports: Option[0] = system.traceIO.map { t =>
+    // val ports: Option[TracePort] = system.traceIO.map { t =>
+      // val trace = IO(DataMirror.internal.chiselTypeClone[TraceOutputTop](t)).suggestName("trace")
+      // trace <> t
       val p = GetSystemParameters(system)
       val chipyardSystem = system.asInstanceOf[ChipyardSystem]
       val tiles = chipyardSystem.totalTiles.values
@@ -513,7 +514,7 @@ class WithTraceIOPunchthrough extends OverrideLazyIOBinder({
         mem0_base = p(ExtMem).map(_.master.base).getOrElse(BigInt(0)),
         mem0_size = p(ExtMem).map(_.master.size).getOrElse(BigInt(0)),
       )
-      TracePort(() => trace, cfg)
+      // TracePort(() => trace, cfg)
     }
     (ports.toSeq, Nil)
   }

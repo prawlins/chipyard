@@ -17,7 +17,7 @@
     }
   },
   "remoteEnv": {
-    "JAVA_OPTS": "-Xmx12G -Xss8M",
-    "SBT_OPTS": "-Xmx12G -Xss8M"
+    // "JAVA_OPTS": "-Xmx12G -Xss8M",
+    // "SBT_OPTS": "-Xmx12G -Xss8M"
   }
 }

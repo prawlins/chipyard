@@ -228,7 +228,7 @@ lazy val chipyard = {
     "tacit" -> tacit,
     "gemmini" -> gemmini,
     "nvdla" -> nvdla,
-    "radiance" -> radiance,
+    // "radiance" -> radiance,
     "caliptra-aes-acc" -> caliptra_aes,
     "compress-acc" -> compressacc,
     "mempress" -> mempress,
@@ -353,16 +353,16 @@ lazy val sodor = withInitCheck((project in file("generators/riscv-sodor")), "ris
   .settings(libraryDependencies ++= rocketLibDeps.value)
   .settings(commonSettings)
 
-lazy val radiance = withInitCheck((project in file("generators/radiance")), "radiance")
-  .dependsOn(rocketchip, gemmini, testchipip)
-  .settings(libraryDependencies ++= rocketLibDeps.value)
-  .settings(libraryDependencies ++= Seq(
-      "edu.berkeley.cs" %% "chiseltest" % chiselTestVersion,
-      "org.scalatest" %% "scalatest" % "3.2.+" % "test",
-      "junit" % "junit" % "4.13" % "test",
-      "org.scalacheck" %% "scalacheck" % "1.14.3" % "test",
-  ))
-  .settings(commonSettings)
+// lazy val radiance = withInitCheck((project in file("generators/radiance")), "radiance")
+//   .dependsOn(rocketchip, gemmini, testchipip)
+//   .settings(libraryDependencies ++= rocketLibDeps.value)
+//   .settings(libraryDependencies ++= Seq(
+//       "edu.berkeley.cs" %% "chiseltest" % chiselTestVersion,
+//       "org.scalatest" %% "scalatest" % "3.2.+" % "test",
+//       "junit" % "junit" % "4.13" % "test",
+//       "org.scalacheck" %% "scalacheck" % "1.14.3" % "test",
+//   ))
+//   .settings(commonSettings)
 
 lazy val gemmini = withInitCheck(freshProject("gemmini", file("generators/gemmini")), "gemmini")
   .dependsOn(rocketchip)

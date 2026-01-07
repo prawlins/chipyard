@@ -1,6 +1,9 @@
 package chipyard
 
-import firrtl.options.{StageMain}
-import chipyard.stage.ChipyardStage
+import freechips.rocketchip.util.GeneratorApp
 
-object Generator extends StageMain(new ChipyardStage)
+object Generator extends GeneratorApp {
+  override lazy val longName = names.topModuleClass + "." + names.configClassName
+  generateFirrtl
+  generateAnno
+}
